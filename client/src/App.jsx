@@ -5,27 +5,35 @@ import "./styles/global.sass"
 import './App.css'
 
 // pages
-import SignIn from './pages/SignIn';
-import Home from './pages/Home';
-import SignUp from './pages/SignUp';
-import Profile from './pages/Profile';
-import About from './pages/About';
+import Products from './pages/Products'
+import Orders from "./pages/Orders"
+import Balance from "./pages/Balance"
+import Benefits from "./pages/Benefits"
+import History from "./pages/History"
+import Logout from "./pages/Logout"
+
 
 // components
-import Header from './components/Header';
+import SideBar from './components/SideBar'
 
 function App() {
 
   return (
     <>
-      <Header/>
-      <Routes>
-        <Route index path="/" element={<Home />}/>
-        <Route path="/sign-in" element={<SignIn />}/>
-        <Route path="/sign-up" element={<SignUp />}/>
-        <Route path="/profile" element={<Profile />}/>
-        <Route path="/about" element={<About />}/>
-      </Routes>
+      <div className="flex">
+        <SideBar/>
+
+        <div className="h-screen flex-1 p-7">  
+          <Routes>
+            <Route index path="/" element={<Products />}/>
+            <Route path="/orders" element={<Orders />}/>
+            <Route path="/balance" element={<Balance />}/>
+            <Route path="/benefits" element={<Benefits />}/>
+            <Route path="/history" element={<History />}/>
+            <Route path="/logout" element={<Logout />}/>
+          </Routes>
+        </div>
+      </div>
     </>
   )
 }
