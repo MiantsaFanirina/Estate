@@ -33,14 +33,7 @@ export class UsersService {
     // Create the user
     const createdUser = await this.databaseService.user.create({ data: { username: username, email: email, password: passwordHash } })
 
-    // Create an account for the user
-    const createdAccount = await this.databaseService.account.create({
-      data: {
-        type: 'personal',
-        balance: 0, 
-        owner: { connect: { id: createdUser.id } } 
-      }
-    })
+    
 
     if(!createdUser) {
       return new Error('User not created')
@@ -53,11 +46,7 @@ export class UsersService {
   }
 
   async findAll() {
-    const usersWithAccounts = await this.databaseService.user.findMany({
-      include: {
-        accounts: true
-      }
-    })
+    const usersWithAccounts = await this.databaseService.user.findMany({})
 
     return usersWithAccounts
   }
@@ -74,23 +63,8 @@ export class UsersService {
   }
 
   async remove(id: number) {
-    // Find the user by ID
-    const user = await this.databaseService.user.findUnique({
-      where: { id },
-      include: { accounts: true } // Include user's accounts
-    })
-  
-    if (!user) {
-      throw new Error('User not found')
-    }
-  
-    // Delete all related accounts
-    await this.databaseService.account.deleteMany({
-      where: { ownerId: id }
-    })
-  
     // Delete the user
-    await this.databaseService.user.delete({
+    const user = await this.databaseService.user.delete({
       where: { id }
     })
   
