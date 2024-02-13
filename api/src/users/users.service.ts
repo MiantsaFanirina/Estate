@@ -9,8 +9,8 @@ export class UsersService {
 
   constructor(private readonly databaseService: DatabaseService, private jwtService: JwtService) {}
 
-  async validateUser(email: string, password: string) {
-    const user = await this.databaseService.user.findUnique({ where: { email } })
+  async validateUser(username: string, password: string) {
+    const user = await this.databaseService.user.findUnique({ where: { username } })
     if (!user) {
       return {user: false, password: false}
     }
@@ -25,13 +25,12 @@ export class UsersService {
   }
 
   async create(createUserDto: Prisma.UserCreateInput) {
-    console.log(createUserDto)
-    const {username, email, password} = createUserDto
+    const {username, password} = createUserDto
 
     const passwordHash = await bcrypt.hash(password, 10)
 
     // Create the user
-    const createdUser = await this.databaseService.user.create({ data: { username: username, email: email, password: passwordHash } })
+    const createdUser = await this.databaseService.user.create({ data: { username: username, password: passwordHash } })
 
     
 

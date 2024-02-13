@@ -13,8 +13,21 @@ datasource db {
 model User {
   id         Int       @id @default(autoincrement())
   username   String    @unique
-  email      String    @unique
   password   String
+  createdAt  DateTime  @default(now())
+  updatedAt  DateTime  @updatedAt
+}
+
+
+model Product {
+  id         Int       @id @default(autoincrement())
+  name       String    @unique
+  reference  String
+  price      Int
+  sellPrice  Int
+  amount     Int
+  category   Int
+  unit       String
   createdAt  DateTime  @default(now())
   updatedAt  DateTime  @updatedAt
 }

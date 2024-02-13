@@ -1,4 +1,6 @@
 import { Routes, Route } from 'react-router-dom'
+import { PrimeReactProvider } from 'primereact/api'
+import "primereact/resources/themes/lara-light-cyan/theme.css"
 
 // styles
 import "./styles/global.sass"
@@ -23,15 +25,17 @@ function App() {
       <div className="flex">
         <SideBar/>
 
-        <div className="h-screen flex-1 p-7">  
-          <Routes>
-            <Route index path="/" element={<Products />}/>
-            <Route path="/orders" element={<Orders />}/>
-            <Route path="/balance" element={<Balance />}/>
-            <Route path="/benefits" element={<Benefits />}/>
-            <Route path="/history" element={<History />}/>
-            <Route path="/logout" element={<Logout />}/>
-          </Routes>
+        <div className="h-screen flex-1 p-7">
+          <PrimeReactProvider>  
+            <Routes>
+              <Route index path="/" element={<Products />}/>
+              <Route path="/orders" element={<Orders />}/>
+              <Route path="/balance" element={<Balance />}/>
+              <Route path="/benefits" element={<Benefits />}/>
+              <Route path="/history" element={<History />}/>
+              <Route path="/logout" element={<Logout />}/>
+            </Routes>
+          </PrimeReactProvider>
         </div>
       </div>
     </>

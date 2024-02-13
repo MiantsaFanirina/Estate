@@ -76,7 +76,7 @@ const SideBar = () => {
                 mt-2`}>
                     <FaIcons.FaHandHoldingUsd className="text-2xl" />
                     <span className={`${!open && "hidden"} origin-left duration-200`}>
-                        Mes benefices
+                        Mes bénéfices
                     </span>
                 </li>
             </NavLink>
