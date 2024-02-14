@@ -7,7 +7,13 @@ import { getProducts,deleteProduct } from '../services/product.service'
 // component
 import EditProductForm from '../components/EditProductForm'
 
-const ProductList = ({products, setProducts}) => {
+// context
+import { useProductContext } from '../context/ProductContext'
+
+const ProductList = () => {
+
+  const {products, setProducts} = useProductContext()
+
 
   const [currentProduct, setCurrentProduct] = useState({})
   const [visible, setVisible] = useState(false)
@@ -33,9 +39,9 @@ const ProductList = ({products, setProducts}) => {
   }
 
   return (
-    <div className="w-4/5 h-full flex flex-col gap-3 bg-gray-200 p-6">
+    <div className="w-4/5 h-full flex flex-col gap-3 bg-gray-200 p-6 overflow-y-scroll">
       
-      <div className="w-full py-4 px-6 t bg-white flex justify-between">
+      <div className="w-full py-4 px-6  bg-white flex justify-between mb-10">
         <h1 className="text-xl font-bold tracking-widest">{(products.length === 0) ? "Aucun produit" : `${products.length} produit(s)`}</h1>
         {products.length == 0 ? null : (
         <div className="flex">
@@ -51,9 +57,9 @@ const ProductList = ({products, setProducts}) => {
             
             <h1 className="font-bold max-w-[20%] text-xl flex items-center gap-1 flex-wrap">{product.name} <span className="text-sm font-normal text-gray-700">( {product.reference} )</span></h1>
 
-            <span className="flex items-center justify-center bg-gray-900 rounded-md py-1 px-3 w-auto text-white mr-2"><span className="font-bold ml-1">{product.amount} {product.unit}</span></span>
-            <span className="flex gap-1 flex-wrap items-center"><span className="text-sm font-bold">Prix d'achat: </span><span className="bg-green-900 px-3 py-1 rounded-md text-white">{product.price} MGA / {product.unit}</span></span>
-            <span className="flex gap-1 flex-wrap items-center"><span className="text-sm font-bold">Prix de vente: </span><span className="bg-dark-purple px-3 py-1 rounded-md text-white">{product.sellPrice} MGA / {product.unit}</span></span>
+            <span className="flex items-center justify-center bg-gradient-to-r from-violet-500/20 to-fuchsia-500/20 rounded-md py-1 px-3 w-auto text-gray-700 shadow-sm mr-2"><span className="font-bold ml-1">{product.amount} {product.unit}</span></span>
+            <span className="flex gap-1 flex-wrap items-center"><span className="text-sm font-bold">Prix d'achat: </span><span className="bg-gradient-to-r from-sky-500/20 to-indigo-500/20 font-bold px-3 py-1 rounded-md shadow-sm text-gray-700">{product.price} MGA / {product.unit}</span></span>
+            <span className="flex gap-1 flex-wrap items-center"><span className="text-sm font-bold">Prix de vente: </span><span className="bg-gradient-to-r from-rose-300/20 to-cyan-600/20 font-bold px-3 py-1 rounded-md shadow-sm text-gray-700">{product.sellPrice} MGA / {product.unit}</span></span>
             
             <span className={"w-[20px] h-[20px] rounded-full " + setCategoryColor(product.category)}></span>
 
@@ -66,7 +72,7 @@ const ProductList = ({products, setProducts}) => {
         </div>
       ))}
       <div>
-        <EditProductForm visible={visible} setVisible={setVisible} setProd={setProducts} product={currentProduct}/>
+        <EditProductForm visible={visible} setVisible={setVisible} product={currentProduct}/>
       </div>
     </div>
   )

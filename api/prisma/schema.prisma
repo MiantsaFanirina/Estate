@@ -20,14 +20,43 @@ model User {
 
 
 model Product {
-  id         Int       @id @default(autoincrement())
-  name       String    @unique
-  reference  String
+  id         Int              @id @default(autoincrement())
+  name       String
+  reference  String           @unique
   price      Int
   sellPrice  Int
   amount     Int
   category   Int
   unit       String
-  createdAt  DateTime  @default(now())
-  updatedAt  DateTime  @updatedAt
+  createdAt  DateTime         @default(now())
+  updatedAt  DateTime         @updatedAt
+  orderedProducts OrderedProduct[]
+}
+
+model Client {
+  id         Int              @id @default(autoincrement())
+  name       String           @unique
+  contact    String           @unique
+  orders     Order[]
+}
+
+model Order {
+  id             Int              @id @default(autoincrement())
+  totalPrice     Int
+  location       String           @default("")
+  client         Client           @relation(fields: [clientId], references: [id])
+  clientId       Int
+  date           DateTime         @default(now())
+  createdAt      DateTime         @default(now())
+  updatedAt      DateTime         @updatedAt
+  orderedProducts OrderedProduct[]
+}
+
+model OrderedProduct {
+  id         Int      @id @default(autoincrement())
+  product    Product  @relation(fields: [productId], references: [id])
+  productId  Int
+  amount     Int
+  order      Order    @relation(fields: [orderId], references: [id])
+  orderId    Int
 }

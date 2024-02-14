@@ -2,6 +2,9 @@ import { Routes, Route } from 'react-router-dom'
 import { PrimeReactProvider } from 'primereact/api'
 import "primereact/resources/themes/lara-light-cyan/theme.css"
 
+// context
+import { ProductContextProvider } from './context/ProductContext'
+
 // styles
 import "./styles/global.sass"
 import './App.css'
@@ -19,7 +22,6 @@ import Logout from "./pages/Logout"
 import SideBar from './components/SideBar'
 
 function App() {
-
   return (
     <>
       <div className="flex">
@@ -27,14 +29,16 @@ function App() {
 
         <div className="h-screen flex-1 p-7">
           <PrimeReactProvider>  
-            <Routes>
-              <Route index path="/" element={<Products />}/>
-              <Route path="/orders" element={<Orders />}/>
-              <Route path="/balance" element={<Balance />}/>
-              <Route path="/benefits" element={<Benefits />}/>
-              <Route path="/history" element={<History />}/>
-              <Route path="/logout" element={<Logout />}/>
-            </Routes>
+            <ProductContextProvider>  
+              <Routes>
+                <Route index path="/" element={<Products />}/>
+                <Route path="/orders" element={<Orders />}/>
+                <Route path="/balance" element={<Balance />}/>
+                <Route path="/benefits" element={<Benefits />}/>
+                <Route path="/history" element={<History />}/>
+                <Route path="/logout" element={<Logout />}/>
+              </Routes>
+            </ProductContextProvider>  
           </PrimeReactProvider>
         </div>
       </div>
