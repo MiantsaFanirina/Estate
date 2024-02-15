@@ -33,7 +33,6 @@ export class UsersController {
 
   @Post('validate')
   validateUser(@Body() authPayload: Prisma.UserCreateInput) {
-    console.log(authPayload)
     return this.usersService.validateUser(authPayload.username, authPayload.password);
   }
 }

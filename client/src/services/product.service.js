@@ -13,7 +13,6 @@ export const createProduct = (product) => {
 };
 
 export const deleteProduct = (id) => {
-    console.log("product" + id);
     return axios.delete(import.meta.env.VITE_API_URL + '/products/' + id);
 };
 

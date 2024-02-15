@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { useState } from 'react'
 
 // components
 import FilterBar from '../components/FilterBar'
@@ -8,33 +8,44 @@ import { getProducts } from '../services/product.service'
 import { useProductContext } from '../context/ProductContext'
 
 const Filter = () => {
+    const { products, setProducts } = useProductContext()
+    const [searchTerm, setSearchTerm] = useState('')
+    const [category, setCategory] = useState(0)
 
-    const {products, setProducts} = useProductContext()
-    console.log(products)
-
-    const setSearchTerm = async (e) => {
-        const searchTerm = e.target.value
-        
+    const setSearchTermAndCategory = async (searchTerm, category) => {
         const res = await getProducts()
-        setProducts(res.data)
+        const allProducts = res.data
 
-        let filteredProducts = products.filter(product => product.name.toLowerCase().includes(searchTerm.toLowerCase()))
+        let filteredProducts = allProducts
 
-        if(filteredProducts.length === 0)
-        {
-            filteredProducts = products.filter(product => product.reference.toLowerCase().includes(searchTerm.toLowerCase()))
+        if (searchTerm) {
+            filteredProducts = filteredProducts.filter(product =>
+                product.name.toLowerCase().includes(searchTerm.toLowerCase()) ||
+                product.reference.toLowerCase().includes(searchTerm.toLowerCase())
+            )
+        }
+
+        if (category !== 0) {
+            filteredProducts = filteredProducts.filter(product => product.category === category)
         }
 
         setProducts(filteredProducts)
-
-        if(searchTerm === "") {
-            const res = await getProducts()
-            setProducts(res.data)
-        }
     }
-        
+
+    const handleSearchTermChange = async (e) => {
+        const searchTerm = e.target.value.trim()
+        setSearchTerm(searchTerm)
+        setSearchTermAndCategory(searchTerm, category)
+    }
+
+    const handleCategoryChange = async (e) => {
+        const category = parseInt(e.target.value)
+        setCategory(category)
+        setSearchTermAndCategory(searchTerm, category)
+    }
+
     return (
-        <FilterBar setSearchTerm={setSearchTerm}></FilterBar>
+        <FilterBar setSearchTerm={handleSearchTermChange} setCategory={handleCategoryChange} ></FilterBar>
     )
 }
 
