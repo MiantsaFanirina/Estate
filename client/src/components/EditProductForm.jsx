@@ -89,17 +89,17 @@ const EditProductForm = ({visible, setVisible, product}) => {
                 <div className="flex justify-around mt-3">
                     <div className="w-1/2">
                         <label className="block uppercase tracking-widest text-gray-700 text-xs font-bold mb-2" htmlFor="price">Prix d'achat unitaire (MGA)</label>
-                        <input type="number" name="price" onChange={handleChange} value={Prod.price} className="appearance-none block w-full bg-gray-200 text-gray-700 border border-gray-200 rounded py-3 px-4 mb-3 leading-tight focus:outline-none focus:bg-white" id="price" />
+                        <input type="number" min={1} name="price" onChange={handleChange} value={Prod.price} className="appearance-none block w-full bg-gray-200 text-gray-700 border border-gray-200 rounded py-3 px-4 mb-3 leading-tight focus:outline-none focus:bg-white" id="price" />
                     </div>
                     <div className="w-1/2 ml-6">
                         <label className="block uppercase tracking-widest text-gray-700 text-xs font-bold mb-2" htmlFor="sellPrice">Prix de vente unitaire (MGA)</label>
-                        <input type="number" name="sellPrice" onChange={handleChange} value={Prod.sellPrice} className="appearance-none block w-full bg-gray-200 text-gray-700 border border-gray-200 rounded py-3 px-4 mb-3 leading-tight focus:outline-none focus:bg-white" id="sellPrice" />
+                        <input type="number" min={1} name="sellPrice" onChange={handleChange} value={Prod.sellPrice} className="appearance-none block w-full bg-gray-200 text-gray-700 border border-gray-200 rounded py-3 px-4 mb-3 leading-tight focus:outline-none focus:bg-white" id="sellPrice" />
                     </div>
                 </div>
                 <div className="mt-3 flex justify-around">
                     <div className="w-1/2">
                         <label className="block uppercase tracking-widest text-gray-700 text-xs font-bold mb-2" htmlFor="amount">Quantité</label>
-                        <input type="number" name="amount" onChange={handleChange} value={Prod.amount} className="appearance-none block w-full bg-gray-200 text-gray-700 border border-gray-200 rounded py-3 px-4 mb-3 leading-tight focus:outline-none focus:bg-white" id="amount" />
+                        <input type="number" min={1} name="amount" onChange={handleChange} value={Prod.amount} className="appearance-none block w-full bg-gray-200 text-gray-700 border border-gray-200 rounded py-3 px-4 mb-3 leading-tight focus:outline-none focus:bg-white" id="amount" />
                     </div>
                     <div className="w-1/2 ml-6">
                         <label className="block uppercase tracking-widest text-gray-700 text-xs font-bold mb-2" htmlFor="unit">Unité</label>
