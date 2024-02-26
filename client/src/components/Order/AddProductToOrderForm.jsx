@@ -1,24 +1,15 @@
 import React, { useEffect, useState } from 'react'
-import { useProductContext } from '../context/ProductContext'
+import { useProductContext } from '../../context/ProductContext'
 import { FaSearch } from "react-icons/fa"
 import { Dialog } from 'primereact/dialog'
-import AddOrderProductList from './AddOrderProductList'
-import AddedProductList from './AddedProductList'
-import formatNumber from '../utils/formatNumber'
-// Function to calculate total price
-const calculateTotalPrice = (prods) => {
-    let totalPrice = 0
-    prods.forEach(product => {
-        totalPrice += product.sellPrice * (product.quantity || 1)
-    })
-    return totalPrice
-}
+import AddOrderProductList from '../Product/AddOrderProductList'
+import AddedProductList from '../Product/AddedProductList'
+import formatNumber from '../../utils/formatNumber'
+import calculateTotalPrice from '../../utils/calculateTotalPrice'
 
-const AddProductToOrderForm = ({ visible, setVisible }) => {
+const AddProductToOrderForm = ({ visible, setVisible, addedProducts, setAddedProducts, totalPrice }) => {
     const { products, setProducts } = useProductContext()
-    const [addedProducts, setAddedProducts] = useState([])
     const [duplicatedProducts, setDuplicatedProducts] = useState([])
-    const [totalPrice, setTotalPrice] = useState(0)
 
     useEffect(() => {
         const filteredProducts = products.filter(product => product.amount > 0)
@@ -32,11 +23,6 @@ const AddProductToOrderForm = ({ visible, setVisible }) => {
             setDuplicatedProducts(updatedDuplicatedProducts)
         }
     }, [visible, products, addedProducts])
-
-    useEffect(() => {
-        const total = calculateTotalPrice(addedProducts)
-        setTotalPrice(total)
-    }, [addedProducts])
 
     const handleAddProduct = (product) => {
         const productWithDefaultQuantity = { ...product, quantity: 1 };
@@ -65,7 +51,14 @@ const AddProductToOrderForm = ({ visible, setVisible }) => {
             header={<h3>Ajouter un produit à une commande</h3>}
             footer={
                 <div className="mt-3 w-full flex justify-center">
-                    <button className="min-w-[400px] bg-dark-purple text-white px-6 py-1 rounded-md shadow text-md">Ajouter</button>
+                    <button 
+                        onClick={(e) => {
+                            e.preventDefault()
+                            setVisible(false)
+                        }}
+                        className="min-w-[400px] bg-dark-purple text-white px-6 py-1 rounded-md shadow text-md">
+                        Confirmer
+                    </button>
                 </div>
             }
             visible={visible}
@@ -93,10 +86,6 @@ const AddProductToOrderForm = ({ visible, setVisible }) => {
                 </div>
 
                 <div>Prix total : <span className="font-bold">{formatNumber(totalPrice)} MGA</span></div>
-
-                <button onClick={() => setVisible(!visible)} className="flex justify-center items-center font-bold bg-dark-purple hover:bg-dark-purple/80 transition-all text-white w-fit px-3 py-2 rounded-lg mt-6">
-                    Confirmer
-                </button>
             </form>
 
         </Dialog>

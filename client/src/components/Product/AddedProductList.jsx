@@ -1,15 +1,9 @@
 import React, { useState, useEffect } from 'react'
-import formatNumber from '../utils/formatNumber'
+import formatNumber from '../../utils/formatNumber'
 import { IoCloseSharp } from "react-icons/io5"
 
 const AddedProductList = ({ products, onUpdateQuantity, onRemoveProduct }) => {
     const [quantities, setQuantities] = useState({})
-
-    useEffect(() => {
-        console.log(products)
-        console.log(quantities)
-    }, [quantities])
-
 
     const handleQuantityChange = (productId, quantity) => {
         setQuantities(prevState => ({

@@ -1,7 +1,7 @@
 import React, {useState} from 'react'
 import { Dialog } from 'primereact/dialog'
-import { useProductContext } from '../context/ProductContext'
-import { getProducts, createProduct } from '../services/product.service'
+import { useProductContext } from '../../context/ProductContext'
+import { getProducts, createProduct } from '../../services/product.service'
 
 const AddProductForm = ({visible, setVisible}) => {
 

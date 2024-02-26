@@ -1,9 +1,9 @@
 import React, { useState } from 'react'
 import { MdEdit, MdDelete } from "react-icons/md"
-import { getProducts,deleteProduct } from '../services/product.service'
-import EditProductForm from '../components/EditProductForm'
-import { useProductContext } from '../context/ProductContext'
-import formatNumber from '../utils/formatNumber'
+import { getProducts,deleteProduct } from '../../services/product.service'
+import EditProductForm from './EditProductForm'
+import { useProductContext } from '../../context/ProductContext'
+import formatNumber from '../../utils/formatNumber'
 
 const ProductList = () => {
 

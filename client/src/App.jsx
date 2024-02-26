@@ -4,7 +4,7 @@ import "primereact/resources/themes/lara-light-cyan/theme.css"
 
 // context
 import { ProductContextProvider } from './context/ProductContext'
-
+import { OrderContextProvider } from './context/OrderContext'
 // styles
 import "./styles/global.sass"
 import './App.css'
@@ -32,12 +32,16 @@ function App() {
             <ProductContextProvider>  
               <Routes>
                 <Route index path="/" element={<Products />}/>
-                <Route path="/orders" element={<Orders />}/>
                 <Route path="/balance" element={<Balance />}/>
                 <Route path="/benefits" element={<Benefits />}/>
                 <Route path="/history" element={<History />}/>
                 <Route path="/logout" element={<Logout />}/>
               </Routes>
+              <OrderContextProvider>
+                <Routes>
+                  <Route path="/orders" element={<Orders />}/>
+                </Routes>
+              </OrderContextProvider>
             </ProductContextProvider>  
           </PrimeReactProvider>
         </div>

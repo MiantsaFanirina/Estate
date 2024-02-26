@@ -5,8 +5,8 @@ import { getProducts } from '../services/product.service';
 import { IoMdAddCircleOutline } from "react-icons/io";
 
 // components
-import AddProductForm from '../components/AddProductForm';
-import ProductList from '../components/ProductList';
+import AddProductForm from '../components/Product/AddProductForm';
+import ProductList from '../components/Product/ProductList';
 
 // hooks
 import Filter from '../hooks/Filter';

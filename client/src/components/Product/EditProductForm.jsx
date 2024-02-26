@@ -2,11 +2,11 @@ import React, {useEffect, useState} from 'react'
 
 
 // SERVICES
-import { updateProduct, getProducts } from '../services/product.service'
+import { updateProduct, getProducts } from '../../services/product.service'
 
 // PRIMEREACT
 import { Dialog } from 'primereact/dialog'
-import { useProductContext } from '../context/ProductContext';
+import { useProductContext } from '../../context/ProductContext';
 
 const EditProductForm = ({visible, setVisible, product}) => {
     const {products, setProducts} = useProductContext()

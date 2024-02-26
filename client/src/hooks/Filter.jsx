@@ -1,7 +1,7 @@
 import React, { useState } from 'react'
 
 // components
-import FilterBar from '../components/FilterBar'
+import FilterBar from '../components/Product/FilterBar'
 
 // services
 import { getProducts } from '../services/product.service'

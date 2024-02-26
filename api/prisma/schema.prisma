@@ -46,7 +46,8 @@ model Order {
   location       String           @default("")
   client         Client           @relation(fields: [clientId], references: [id])
   clientId       Int
-  date           DateTime         @default(now())
+  isPayed        Boolean          
+  shippingDate   String
   createdAt      DateTime         @default(now())
   updatedAt      DateTime         @updatedAt
   orderedProducts OrderedProduct[]

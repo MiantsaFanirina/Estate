@@ -1,16 +1,19 @@
-import React, {useState} from 'react'
+import React, {useState, useContext} from 'react'
 
 // icons
-import { IoMdAddCircleOutline } from "react-icons/io";
+import { IoMdAddCircleOutline } from "react-icons/io"
 import { ImCheckboxChecked } from "react-icons/im"
 import { FaClock } from "react-icons/fa"
 import { PiNotepadFill } from "react-icons/pi"
 
 // components
-import AddOrdersForm from '../components/AddOrdersForm';
+import AddOrdersForm from '../components/Order/AddOrdersForm'
+
+// context
+import { OrderContext } from '../context/OrderContext'
 
 const Orders = () => {
-
+  const orders = useContext(OrderContext)
   const [visible, setVisible] = useState(false)
   return (
     <div className="w-full">
@@ -40,9 +43,11 @@ const Orders = () => {
         </div>
       
       </div>
-      <button onClick={() => setVisible(!visible)} className="flex justify-center items-center font-bold bg-dark-purple hover:bg-dark-purple/80 transition-all text-white w-fit px-3 py-2 rounded-lg mt-6">
+      <button onClick={() => setVisible(!visible)} className="mb-6 flex justify-center items-center font-bold bg-dark-purple hover:bg-dark-purple/80 transition-all text-white w-fit px-3 py-2 rounded-lg mt-6">
         <IoMdAddCircleOutline className="mr-3 text-2xl"/> Ajouter une commande
       </button>
+      
+      {JSON.stringify(orders)}
     </div>
   )
 }
