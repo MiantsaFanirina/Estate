@@ -5,17 +5,17 @@ import { getOrders } from '../services/order.service'
 export const OrderContext = createContext({})
 
 export const OrderContextProvider = ({children}) => {
-    const [Orders, setOrders] = useState([])
+    const [allOrders, setAllOrders] = useState([])
     useEffect(() => {
         getOrders().then(res => {
-                  setOrders(res.data);
+                  setAllOrders(res.data);
         }).catch(error => {
-          setOrders([]);
+          setAllOrders([]);
         });
     }, [])
 
     return (
-        <OrderContext.Provider value={{Orders, setOrders}}>
+        <OrderContext.Provider value={{allOrders, setAllOrders}}>
             {children}
         </OrderContext.Provider>
     )

@@ -2,8 +2,8 @@ import React, { useEffect, useState } from 'react'
 import { useProductContext } from '../../context/ProductContext'
 import { FaSearch } from "react-icons/fa"
 import { Dialog } from 'primereact/dialog'
-import AddOrderProductList from '../Product/AddOrderProductList'
-import AddedProductList from '../Product/AddedProductList'
+import AddOrderProductList from './AddOrderProductList'
+import AddedProductList from './AddedProductList'
 import formatNumber from '../../utils/formatNumber'
 import calculateTotalPrice from '../../utils/calculateTotalPrice'
 

@@ -9,25 +9,29 @@ import { Dialog } from 'primereact/dialog'
 // component
 import AddProductToOrderForm from './AddProductToOrderForm'
 
+// context
+import { useOrderContext } from '../../context/OrderContext'
+import { useProductContext } from '../../context/ProductContext'
+
+// service
+import { getOrders } from '../../services/order.service'
+
 import calculateTotalPrice from '../../utils/calculateTotalPrice'
 import { createOrder } from '../../services/order.service'
 
+ 
 const AddOrdersForm = ({visible, setVisible}) => {
     const [visi, setVisi] = useState(false)
     const [err, setErr] = useState(null)
     const [addedProducts, setAddedProducts] = useState([])
     const [totalPrice, setTotalPrice] = useState(0)
-
+    const { allOrders, setAllOrders } = useOrderContext()
 
     useEffect(() => {
         if(!visible) {
             setAddedProducts([])
         }
     }, [visible])
-
-    useEffect(() => {
-        console.log(addedProducts)
-    }, [addedProducts])
 
 
     useEffect(() => {
@@ -76,7 +80,12 @@ const AddOrdersForm = ({visible, setVisible}) => {
                 totalPrice: totalPrice,
                 orderedProducts: addedProducts
             }
-           await createOrder(orders)  
+           const createdOrder = await createOrder(orders)  
+           if(createdOrder) {
+            const UpdatedOrders = await getOrders()
+            setAllOrders(UpdatedOrders.data)
+            setVisible(false)
+           }
         }
     }
 
